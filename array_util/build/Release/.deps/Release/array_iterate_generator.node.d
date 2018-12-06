@@ -1,0 +1,1 @@
+cmd_Release/array_iterate_generator.node := c++ -bundle -undefined dynamic_lookup -Wl,-no_pie -Wl,-search_paths_first -mmacosx-version-min=10.7 -arch x86_64 -L./Release  -o Release/array_iterate_generator.node Release/obj.target/array_iterate_generator/array_iterate_generator.o 

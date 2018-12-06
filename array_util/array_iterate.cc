@@ -1,7 +1,7 @@
 #include <node.h>
 #include <string>
 
-namespace array_util {
+namespace array_iterate {
 
 using v8::FunctionCallbackInfo;
 using v8::Function;
@@ -44,7 +44,6 @@ void ForEachVoid(const FunctionCallbackInfo<Value>& args) {
 
   // get the call back function
   Local<Function> cb = Local<Function>::Cast(args[1]);
-  // Local<Promise::Resolver> resolver = Promise::Resolver::New(isolate);
   const unsigned argc = 1;
 
   // iterate through array and call callBackFunction on each element
@@ -52,10 +51,7 @@ void ForEachVoid(const FunctionCallbackInfo<Value>& args) {
   unsigned int arrayLength = array->Length();
   for (unsigned int i = 0; i < arrayLength; i++) {
       Local<Value> argv[argc] = {array->Get(i)};
-      // Local<Value> val = {array->Get(i)};
       cb->Call(Null(isolate), argc, argv);
-      // resolver->Resolve(val);
-      // resolver->GetPromise();
   }
 }
 
@@ -65,6 +61,6 @@ void init(Local<Object> exports) {
 }
 
 // set node_module
-NODE_MODULE(array_util, init)
+NODE_MODULE(array_iterate, init)
 
 }

@@ -3,4 +3,4 @@
 export builddir_name ?= ./build/.
 .PHONY: all
 all:
-	$(MAKE) array_util
+	$(MAKE) array_iterate array_iterate_generator array_iterate_return

@@ -321,12 +321,22 @@ $(obj).$(TOOLSET)/%.o: $(obj)/%.s FORCE_DO_CMD
 
 ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
     $(findstring $(join ^,$(prefix)),\
-                 $(join ^,array_util.target.mk)))),)
-  include array_util.target.mk
+                 $(join ^,array_iterate.target.mk)))),)
+  include array_iterate.target.mk
+endif
+ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
+    $(findstring $(join ^,$(prefix)),\
+                 $(join ^,array_iterate_generator.target.mk)))),)
+  include array_iterate_generator.target.mk
+endif
+ifeq ($(strip $(foreach prefix,$(NO_LOAD),\
+    $(findstring $(join ^,$(prefix)),\
+                 $(join ^,array_iterate_return.target.mk)))),)
+  include array_iterate_return.target.mk
 endif
 
 quiet_cmd_regen_makefile = ACTION Regenerating $@
-cmd_regen_makefile = cd $(srcdir); /Users/bierbraj/.nvm/versions/node/v6.11.4/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/bierbraj/github/custom_node_modules/array_util/build/config.gypi -I/Users/bierbraj/.nvm/versions/node/v6.11.4/lib/node_modules/node-gyp/addon.gypi -I/Users/bierbraj/.node-gyp/6.11.4/include/node/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/bierbraj/.node-gyp/6.11.4" "-Dnode_gyp_dir=/Users/bierbraj/.nvm/versions/node/v6.11.4/lib/node_modules/node-gyp" "-Dnode_lib_file=/Users/bierbraj/.node-gyp/6.11.4/<(target_arch)/node.lib" "-Dmodule_root_dir=/Users/bierbraj/github/custom_node_modules/array_util" "-Dnode_engine=v8" binding.gyp
+cmd_regen_makefile = cd $(srcdir); /Users/bierbraj/.nvm/versions/node/v6.11.4/lib/node_modules/node-gyp/gyp/gyp_main.py -fmake --ignore-environment "--toplevel-dir=." -I/Users/bierbraj/github/array_utils/array_util/build/config.gypi -I/Users/bierbraj/.nvm/versions/node/v6.11.4/lib/node_modules/node-gyp/addon.gypi -I/Users/bierbraj/.node-gyp/6.11.4/include/node/common.gypi "--depth=." "-Goutput_dir=." "--generator-output=build" "-Dlibrary=shared_library" "-Dvisibility=default" "-Dnode_root_dir=/Users/bierbraj/.node-gyp/6.11.4" "-Dnode_gyp_dir=/Users/bierbraj/.nvm/versions/node/v6.11.4/lib/node_modules/node-gyp" "-Dnode_lib_file=/Users/bierbraj/.node-gyp/6.11.4/<(target_arch)/node.lib" "-Dmodule_root_dir=/Users/bierbraj/github/array_utils/array_util" "-Dnode_engine=v8" binding.gyp
 Makefile: $(srcdir)/../../../.nvm/versions/node/v6.11.4/lib/node_modules/node-gyp/addon.gypi $(srcdir)/../../../.node-gyp/6.11.4/include/node/common.gypi $(srcdir)/build/config.gypi $(srcdir)/binding.gyp
 	$(call do_cmd,regen_makefile)
 

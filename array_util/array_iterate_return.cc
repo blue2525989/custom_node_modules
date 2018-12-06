@@ -1,7 +1,7 @@
 #include <node.h>
 #include <string>
 
-namespace array_util {
+namespace array_iterate_return {
 
 using v8::FunctionCallbackInfo;
 using v8::Function;
@@ -24,7 +24,7 @@ const char* ToCString(Local<String> str) {
 }
 
 // function that iterates over an array calling a function
-void ForEachVoid(const FunctionCallbackInfo<Value>& args) {
+void ForEachReturn(const FunctionCallbackInfo<Value>& args) {
   Isolate* isolate = args.GetIsolate();
   // check argument length
   if (args.Length() < 2)
@@ -52,21 +52,20 @@ void ForEachVoid(const FunctionCallbackInfo<Value>& args) {
   for (unsigned int i = 0; i < arrayLength; i++) {
       Local<Value> argv[argc] = {array->Get(i)};
       cb->Call(Null(isolate), argc, argv);
-      /* populate an array and return
+      // populate an array and return
       Local<Value> element = array->Get(i);
       Local<String> value = element->ToString();
       const char* realValue = ToCString(value);
       newArray.push_back(realValue);
-      */
   }
   // if wanting to return populated array
-  // args.GetReturnValue().Set(array);
+  args.GetReturnValue().Set(array);
 }
 
 void init(Local<Object> exports) {
-  NODE_SET_METHOD(exports, "forEachVoid", ForEachVoid);
+  NODE_SET_METHOD(exports, "forEachReturn", ForEachReturn);
 }
 
-NODE_MODULE(array_util, init)
+NODE_MODULE(array_iterate_return, init)
 
 }
