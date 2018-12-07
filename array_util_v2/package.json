@@ -1,17 +1,20 @@
 {
   "name": "array_util",
-  "version": "1.0.0",
-  "description": "util",
-  "main": "index.js",
+  "version": "0.0.0",
+  "description": "array utility",
+  "main": "arrays.js",
   "scripts": {
+    "start": "node arrays.js",
+    "run": "node arrays.js",
     "test": "avs",
     "install": "node-gyp rebuild"
   },
-  "author": "",
-  "license": "ISC",
+  "private": true,
   "gypfile": true,
   "dependencies": {
     "bindings": "^1.3.1",
-    "nan": "^2.11.1"
+    "nan": "^2.11.1",
+    "node-gyp": "^3.8.0",
+    "rebuild": "^0.1.2"
   }
 }
