@@ -1,12 +1,11 @@
 {
-  "name": "array_util",
-  "version": "0.0.0",
-  "description": "array utility",
-  "main": "arrays.js",
+  "name": "array_util_v3",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
   "scripts": {
-    "start": "node arrays.js",
-    "start-copy": "node copy.js",
-    "test": "avs",
+    "start": "node index.js",
+    "run": "node index.js",
     "install": "node-gyp rebuild"
   },
   "private": true,

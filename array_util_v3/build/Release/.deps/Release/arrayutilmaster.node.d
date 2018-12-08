@@ -1,0 +1,1 @@
+cmd_Release/arrayutilmaster.node := c++ -bundle -undefined dynamic_lookup -Wl,-no_pie -Wl,-search_paths_first -mmacosx-version-min=10.7 -arch x86_64 -L./Release  -o Release/arrayutilmaster.node Release/obj.target/arrayutilmaster/arrayutilmaster.o Release/obj.target/arrayutilmaster/myobject.o 

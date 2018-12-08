@@ -15,6 +15,7 @@ using v8::Handle;
 using v8::Boolean;
 
 // convert v8 string to cpp string
+// this is used more for logging stuff out to see whats going on
 const char* ToCString(Local<String> str) {
     String::Utf8Value value(str);
     return *value ? *value : "<string conversion failed>";
@@ -138,7 +139,6 @@ void FindFirst(const Nan::FunctionCallbackInfo<Value>& info) {
       return;
   }
   // check argument types
-  //todo figure out how to check the comparator
   if (!info[0]->IsArray())
   {
       isolate->ThrowException(Exception::TypeError(
@@ -297,32 +297,43 @@ void StrictEquals(const Nan::FunctionCallbackInfo<Value>& info) {
   unsigned int arrayLength = array->Length();
   unsigned int arrayCompareLength = arrayCompare->Length();
   unsigned int counter = 0;
-  if (arrayLength != arrayCompareLength)
+  // if (arrayLength != arrayCompareLength)
+  // {
+  //     info.GetReturnValue().Set(falseBool);
+  //     return;
+  // }
+  // for (unsigned int i = 0; i < arrayLength; i++) {
+  //     for (unsigned int x = 0; x < arrayCompareLength; x++) {
+  //         // use a counter to increament to step piece by piece
+  //         Local<Value> arrayValue = array->Get(counter++);
+  //         Local<Value> arrayCompareValue = array->Get(x);
+  //         if (!arrayValue->StrictEquals(arrayCompareValue))
+  //         {
+  //             info.GetReturnValue().Set(falseBool);
+  //             return;
+  //         }
+  //
+  //     }
+  //     break;
+  // }
+  Local<Boolean> trueBool = Boolean::New(isolate, true);
+
+  if (array->StrictEquals(arrayCompare))
+  {
+      info.GetReturnValue().Set(trueBool);
+      return;
+  }
+  else
   {
       info.GetReturnValue().Set(falseBool);
       return;
   }
-  for (unsigned int i = 0; i < arrayLength; i++) {
-      for (unsigned int x = 0; x < arrayCompareLength; x++) {
-          // use a counter to increament to step piece by piece
-          Local<Value> arrayValue = array->Get(counter++);
-          Local<Value> arrayCompareValue = array->Get(x);
-          if (!arrayValue->StrictEquals(arrayCompareValue))
-          {
-              info.GetReturnValue().Set(falseBool);
-              return;
-          }
-
-      }
-      break;
-  }
-  Local<Boolean> trueBool = Boolean::New(isolate, true);
-  info.GetReturnValue().Set(trueBool);
-  return;
+  // info.GetReturnValue().Set(trueBool);
+  // return;
 }
 
 
-
+// todo fix these
 // equals - added
 void Equals(const Nan::FunctionCallbackInfo<Value>& info) {
   Isolate* isolate = info.GetIsolate();
@@ -358,22 +369,33 @@ void Equals(const Nan::FunctionCallbackInfo<Value>& info) {
       info.GetReturnValue().Set(falseBool);
       return;
   }
-  for (unsigned int i = 0; i < arrayLength; i++) {
-      for (unsigned int x = 0; x < arrayCompareLength; x++) {
-          // use a counter to increament to step piece by piece
-          Local<Value> arrayValue = array->Get(counter++);
-          Local<Value> arrayCompareValue = array->Get(x);
-          if (arrayValue != arrayCompareValue)
-          {
-              info.GetReturnValue().Set(falseBool);
-              return;
-          }
 
-      }
-      break;
+  if (array == arrayCompare)
+  {
+      info.GetReturnValue().Set(trueBool);
+      return;
   }
-  info.GetReturnValue().Set(trueBool);
-  return;
+  else
+  {
+      info.GetReturnValue().Set(falseBool);
+      return;
+  }
+  // for (unsigned int i = 0; i < arrayLength; i++) {
+  //     for (unsigned int x = 0; x < arrayCompareLength; x++) {
+  //         // use a counter to increament to step piece by piece
+  //         Local<Value> arrayValue = array->Get(counter++);
+  //         Local<Value> arrayCompareValue = array->Get(x);
+  //         if (arrayValue != arrayCompareValue)
+  //         {
+  //             info.GetReturnValue().Set(falseBool);
+  //             return;
+  //         }
+  //
+  //     }
+  //     break;
+  // }
+  // info.GetReturnValue().Set(trueBool);
+  // return;
 }
 
 /* boolean functions **/

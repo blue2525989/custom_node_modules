@@ -60,8 +60,6 @@
     "want_separate_host_toolset": 0,
     "xcode_version": "7.0",
     "nodedir": "/Users/bierbraj/.node-gyp/6.11.4",
-    "standalone_static_library": 1,
-    "Wunused_variable": "true",
-    "WDepreciated_declarations": "true"
+    "standalone_static_library": 1
   }
 }
