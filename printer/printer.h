@@ -21,7 +21,7 @@ namespace print {
     static void Error(const v8::FunctionCallbackInfo<v8::Value>& args);
     static void GetLogLevel(const v8::FunctionCallbackInfo<v8::Value>& args);
     static v8::Persistent<v8::Function> constructor;
-    v8::Local<v8::String> logLevel_;
+    std::string logLevel_;
   };
 
 }
