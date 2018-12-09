@@ -1,0 +1,16 @@
+{
+  "name": "printer",
+  "version": "0.0.1",
+  "description": "",
+  "main": "print_info.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "install": "node-gyp rebuild"
+  },
+  "author": "",
+  "license": "ISC",
+  "gypfile": true,
+  "dependencies": {
+    "bindings": "^1.3.1"
+  }
+}

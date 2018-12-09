@@ -165,6 +165,7 @@ void FindFirst(const Nan::FunctionCallbackInfo<Value>& info) {
 // find all - added
 void FindAll(const Nan::FunctionCallbackInfo<Value>& info) {
   Isolate* isolate = info.GetIsolate();
+
   // check argument length
   if (info.Length() < 2)
   {
@@ -181,14 +182,47 @@ void FindAll(const Nan::FunctionCallbackInfo<Value>& info) {
       ));
       return;
   }
+  if (info[1]->IsFunction())
+  {
+
+      std::string str("did it work");
+      printf("%s\n", str.c_str());
+
+      // std::string strFunc(strFuncInfo);
+      // printf("%s\n", info[1]->ToString());
+      //todo if it is a function and results in true we collect it
+  }
 
   Local<Value> compareValue = Local<Value>::Cast(info[1]);
 
   Local<Array> array = Local<Array>::Cast(info[0]);
   unsigned int arrayLength = array->Length();
   unsigned int counter = 0;
+  unsigned int argc = 1;
   for (unsigned int i = 0; i < arrayLength; i++) {
       Local<Value> arrayValue = array->Get(i);
+      if (info[1]->IsFunction())
+      {
+          // std::string str("did it work");
+          // printf("%s\n", str.c_str());
+          //
+          // // std::string strFunc(strFuncInfo);
+          // printf("%s\n", info[1]->ToString());
+          //todo if it is a function and results in true we collect it
+
+        // grab function
+        // Local<Value> argv[] = {arrayValue};
+        Local<Function> cbp = Local<Function>::Cast(info[1]);
+        Handle<Value> cb_result = cbp->Call(Null(isolate), arrayValue, argc);
+        // if (!cb_result->IsUndefined())
+        // {
+        //     if (cb_result->IsBoolean() || cb_result->IsBooleanObject())
+        //     {
+        //         std::string wow("wow made it");
+        //         printf("%s\n", wow.c_str());
+        //     }
+        // }
+      }
       if (arrayValue->StrictEquals(compareValue))
       {
           counter++;

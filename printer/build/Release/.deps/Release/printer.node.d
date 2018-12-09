@@ -1,0 +1,1 @@
+cmd_Release/printer.node := c++ -bundle -undefined dynamic_lookup -Wl,-no_pie -Wl,-search_paths_first -mmacosx-version-min=10.7 -arch x86_64 -L./Release  -o Release/printer.node Release/obj.target/printer/printer_main.o Release/obj.target/printer/printer.o Release/obj.target/printer/print_util.o 
